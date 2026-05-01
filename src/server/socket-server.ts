@@ -7,7 +7,12 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const rooms = new Map();
+type RoomUser = {
+  userName: string;
+  socketId: string;
+};
+
+const rooms = new Map<string, Map<string, RoomUser>>();
 
 app.prepare().then(() => {
   const server = createServer((req, res) => {
@@ -29,10 +34,10 @@ app.prepare().then(() => {
       socket.join(roomId);
       
       if (!rooms.has(roomId)) {
-        rooms.set(roomId, new Map());
+        rooms.set(roomId, new Map<string, RoomUser>());
       }
       
-      const room = rooms.get(roomId);
+      const room = rooms.get(roomId)!;
       room.set(socket.id, { userName, socketId: socket.id });
 
       const usersInRoom = Array.from(room.values()).filter(
