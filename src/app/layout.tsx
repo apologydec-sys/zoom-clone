@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kay_x Video Calling App",
-  description: "A modern video calling application built with Next.js, WebRTC, and Socket.IO",
+  title: "Akanni world video calling app",
+  description:
+    "Welcome to Akanni world video calling app — a modern video calling app built with Next.js, WebRTC, and Socket.IO",
 };
 
 export default function RootLayout({
